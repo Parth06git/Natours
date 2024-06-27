@@ -7,6 +7,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const hpp = require("hpp");
 const cookieParser = require("cookie-parser");
+const compression = require("compression");
 
 const AppError = require("./utls/appError");
 const globalErrorHandler = require("./controllers/errorController");
@@ -22,6 +23,9 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
 // 1) GLOBAL MIDDLEWARES
+
+// Compress the response
+app.use(compression());
 
 // Serving static files
 app.use(express.static(path.join(__dirname, "public")));
